@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.javaProjectS.dao.User2DAO">
+	<select id="getUser2List" resultType="com.spring.javaProjectS.vo.UserVO">
+		select * from user;
+	</select>
+	<select id="getUser2Search" resultType="com.spring.javaProjectS.vo.UserVO">
+		SELECT * FROM user WHERE name LIKE CONCAT('%',#{name},'%') ORDER BY idx DESC;
+	</select>
+	
+	<insert id="setUser2Input">
+		INSERT INTO user VALUES(DEFAULT, #{vo.mid}, #{vo.name}, #{vo.age}, #{vo.address});
+	</insert>
+	
+	<update id="setUser2Update">
+		UPDATE user SET name=#{vo.name}, age=#{vo.age}, address=#{vo.address} WHERE idx=#{vo.idx};
+	</update>
+	
+	
+	<delete id="setUser2Delete">
+		DELETE FROM user WHERE idx=#{idx};
+	</delete>
+</mapper>
