@@ -66,12 +66,12 @@
 	<h2> 회 원 리 스 트 2</h2>
 	<br/>
 	<div class="row mb-2">
-		<div class="col">
+		<div class="col-7">
 			<input type="button" value="회원가입폼" onclick="fNewForm()" class="btn btn-success btn-sm"/>
 		</div>
-		<div class="col text-right">
-			<div>
-				개별검색 : <input type="text" name="name" id="name"/>
+		<div class="col-5">
+			<div class="input-group">
+				<input type="text" name="name" id="name"/>
 				<input type="button" class="btn btn-info btn-sm" value="검색" onclick="nameSearch()"/>
 			</div>
 		</div>
