@@ -5,7 +5,7 @@ import java.util.List;
 import com.spring.javaProjectS.vo.UserVO;
 
 public interface UserService {
-	
+
 	public List<UserVO> getUserList();
 
 	public int setUserDelete(int idx);
@@ -21,4 +21,5 @@ public interface UserService {
 	public int setUser2Input(UserVO vo);
 
 	public int setUser2Update(UserVO vo);
+
 }

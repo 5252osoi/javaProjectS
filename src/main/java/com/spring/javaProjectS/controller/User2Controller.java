@@ -14,12 +14,12 @@ import com.spring.javaProjectS.vo.UserVO;
 @Controller
 @RequestMapping("/user2")
 public class User2Controller {
-	
+
 	@Autowired
 	UserService userService;
 	
-	//À¯ÀúÀüÃ¼¸®½ºÆ®
-	@RequestMapping(value = "/user2List", method=RequestMethod.GET)
+	// User ì „ì²´ ë¦¬ìŠ¤íŠ¸
+	@RequestMapping(value = "/user2List", method = RequestMethod.GET)
 	public String user2ListGet(Model model) {
 		List<UserVO> vos = userService.getUser2List();
 		
@@ -27,37 +27,42 @@ public class User2Controller {
 		
 		return "study/user/user2List";
 	}
-	//À¯ÀúÃß°¡
-	@RequestMapping(value = "/user2List", method=RequestMethod.POST)
+	
+	// User ê°€ìž…...í•˜ê¸°...
+	@RequestMapping(value = "/user2List", method = RequestMethod.POST)
 	public String user2ListPost(UserVO vo) {
-		int res=userService.setUser2Input(vo);
-		if(res!=0)return "redirect:/message/user2InputOk";
+		int res = userService.setUser2Input(vo);
+				
+		if(res != 0) return "redirect:/message/user2InputOk";
 		else return "redirect:/message/user2InputNo";
 	}
-	//À¯Àú¼öÁ¤
-	@RequestMapping(value = "/user2Update", method=RequestMethod.POST)
-	public String user2UpdatePost(UserVO vo) {
-		int res=userService.setUser2Update(vo);
-		if(res!=0)return "redirect:/message/user2UpdateOk";
-		else return "redirect:/message/user2UpdateNo";
-	}
-	//À¯Àú°Ë»ö
-	@RequestMapping(value = "/user2Search",method = RequestMethod.GET)
-	public String user2SearchGet(Model model,String name) {
+	
+	// User ê°œë³„ ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸
+	@RequestMapping(value = "/user2Search", method = RequestMethod.GET)
+	public String user2SearchGet(Model model, String name) {
 		List<UserVO> vos = userService.getUser2Search(name);
 		
 		model.addAttribute("vos", vos);
+		model.addAttribute("name", name);
 		
 		return "study/user/user2List";
 	}
-	//À¯Àú»èÁ¦
-	@RequestMapping(value = "/user2Delete",method = RequestMethod.GET)
-	public String user2DeleteGet(Model model,int idx) {
+	
+	// User ì‚­ì œì²˜ë¦¬
+	@RequestMapping(value = "/user2Delete", method = RequestMethod.GET)
+	public String user2DeleteGet(Model model, int idx) {
 		int res = userService.setUser2Delete(idx);
-		if(res!=0) {
-			return "redirect:/message/user2DeleteOk";
-		} else	{
-			return "redirect:/message/user2DeleteNo";
-		}
+		
+		if(res != 0) return "redirect:/message/user2DeleteOk";
+		else return "redirect:/message/user2DeleteNo";
+	}
+	
+	// User ìˆ˜ì •ì²˜ë¦¬
+	@RequestMapping(value = "/user2Update", method = RequestMethod.POST)
+	public String user2DeleteGet(UserVO vo) {
+		int res = userService.setUser2Update(vo);
+		
+		if(res != 0) return "redirect:/message/user2UserUpdateOk";
+		else return "redirect:/message/user2UserUpdateNo";
 	}
 }

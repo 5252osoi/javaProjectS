@@ -3,7 +3,6 @@ package com.spring.javaProjectS.vo;
 import lombok.Data;
 
 //public @Data class UserVO {
-
 @Data
 public class UserVO {
 	private int idx;

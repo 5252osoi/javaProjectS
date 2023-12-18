@@ -12,7 +12,7 @@ public interface GuestService {
 
 	public int adminLogin(String mid, String pwd);
 
-	public int guestDelete(int idx);
+	public int setGuestDelete(int idx);
 
 	public int getTotRecCnt();
 

@@ -12,5 +12,5 @@ public interface UserDAO {
 
 	public List<UserVO> getUserSearch(String name);
 
-	
+
 }

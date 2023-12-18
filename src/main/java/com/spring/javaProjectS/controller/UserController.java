@@ -15,33 +15,39 @@ import com.spring.javaProjectS.vo.UserVO;
 @RequestMapping("/user")
 public class UserController {
 	
+	
+//	@Autowired @Qualifier("userServiceImpl")
+//	UserService userService;
+//	@Autowired
+//	UserServiceImpl userService;
+	
 	@Autowired
 	UserService userService;
-	
+
 	@RequestMapping(value = "/userList", method = RequestMethod.GET)
 	public String userListGet(Model model) {
 		
 		List<UserVO> vos = userService.getUserList();
 		
-		model.addAttribute("vos",vos);
+		model.addAttribute("vos", vos);
 		
 		return "study/user/userList";
 	}
-	//유저삭제
-	@RequestMapping(value = "userDelete", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/userDelete", method = RequestMethod.GET)
 	public String userDeleteGet(int idx) {
-		int res= userService.setUserDelete(idx);
-		if (res!=0) {
-			return "redirect:/message/userDeleteOk";
-		}
+		int res = userService.setUserDelete(idx);
+		
+		if(res != 0) return "redirect:/message/userDeleteOk";
 		else return "redirect:/message/userDeleteNo";
 	}
-	//유저 이름으로 검색
-	@RequestMapping(value = "userSearch" , method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/userSearch", method = RequestMethod.GET)
 	public String userSearchGet(String name, Model model) {
 		List<UserVO> vos = userService.getUserSearch(name);
 		
-		model.addAttribute("vos",vos);
+		model.addAttribute("vos", vos);
+		
 		return "study/user/userList";
 	}
 }

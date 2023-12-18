@@ -10,6 +10,7 @@ import com.spring.javaProjectS.vo.UserVO;
 
 @Repository("userDAO")
 public class UserDAOImpl implements UserDAO {
+
 	@Autowired
 	SqlSession sqlSession;
 
@@ -21,12 +22,13 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public int setUserDelete(int idx) {
-		return sqlSession.delete("userNS.setUserDelete",idx);
+		return sqlSession.delete("userNS.setUserDelete", idx);
 	}
 
 	@Override
 	public List<UserVO> getUserSearch(String name) {
-		List<UserVO> vos = sqlSession.selectList("userNS.getUserSearch",name);
+		List<UserVO> vos = sqlSession.selectList("userNS.getUserSearch", name);
 		return vos;
 	}
+	
 }

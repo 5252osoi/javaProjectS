@@ -3,16 +3,20 @@ package com.spring.javaProjectS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.spring.javaProjectS.dao.User2DAO;
 import com.spring.javaProjectS.dao.UserDAO;
 import com.spring.javaProjectS.vo.UserVO;
 
+//@Component
 @Service
 public class UserServiceImpl implements UserService {
+
 	@Autowired
 	UserDAO userDAO;
+	
 	@Autowired
 	User2DAO user2DAO;
 

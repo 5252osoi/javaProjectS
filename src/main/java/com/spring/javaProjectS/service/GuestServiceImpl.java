@@ -11,13 +11,14 @@ import com.spring.javaProjectS.vo.GuestVO;
 @Service
 public class GuestServiceImpl implements GuestService {
 
-	
 	@Autowired
 	GuestDAO guestDAO;
 
 	@Override
 	public List<GuestVO> guestList(int startIndexNo, int pageSize) {
-		return guestDAO.guestList(startIndexNo,pageSize);
+		//List<GuestVO> vos = guestList(startIndexNo, pageSize);
+		//return vos;
+		return guestDAO.guestList(startIndexNo, pageSize);
 	}
 
 	@Override
@@ -33,12 +34,13 @@ public class GuestServiceImpl implements GuestService {
 	}
 
 	@Override
-	public int guestDelete(int idx) {
-		return guestDAO.guestDelete(idx);
+	public int setGuestDelete(int idx) {
+		return guestDAO.setGuestDelete(idx);
 	}
 
 	@Override
 	public int getTotRecCnt() {
 		return guestDAO.getTotRecCnt();
 	}
+	
 }

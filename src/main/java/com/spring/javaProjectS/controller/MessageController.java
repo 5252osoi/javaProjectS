@@ -11,66 +11,96 @@ public class MessageController {
 
 	@RequestMapping(value="/message/{msgFlag}", method = RequestMethod.GET)
 	public String msgGet(@PathVariable String msgFlag, String mid, Model model) {
+		
 		if(msgFlag.equals("userDeleteOk")) {
-			model.addAttribute("msg", "»èÁ¦µÇ¾ú½À´Ï´Ù.");
+			model.addAttribute("msg", "userê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			model.addAttribute("url", "user/userList");
 		}
 		else if(msgFlag.equals("userDeleteNo")) {
-			model.addAttribute("msg", "»èÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù.");
+			model.addAttribute("msg", "user ì‚­ì œ ì‹¤íŒ¨~~");
 			model.addAttribute("url", "user/userList");
 		}
 		else if(msgFlag.equals("user2DeleteOk")) {
-			model.addAttribute("msg", "»èÁ¦µÇ¾ú½À´Ï´Ù¤»¤».");
+			model.addAttribute("msg", "user2ê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			model.addAttribute("url", "user2/user2List");
 		}
 		else if(msgFlag.equals("user2DeleteNo")) {
-			model.addAttribute("msg", "»èÁ¦¿¡ ½ÇÆĞÇß½À´Ï´Ù¤»¤».");
+			model.addAttribute("msg", "user2 ì‚­ì œ ì‹¤íŒ¨~~");
 			model.addAttribute("url", "user2/user2List");
 		}
 		else if(msgFlag.equals("user2InputOk")) {
-			model.addAttribute("msg", "°¡ÀÔµÇ¾ú½À´Ï´Ù¤»¤».");
+			model.addAttribute("msg", "íšŒì› ê°€ì… ì„±ê³µ!!!");
 			model.addAttribute("url", "user2/user2List");
 		}
 		else if(msgFlag.equals("user2InputNo")) {
-			model.addAttribute("msg", "°¡ÀÔ¿¡ ½ÇÆĞÇß½À´Ï´Ù¤»¤».");
+			model.addAttribute("msg", "íšŒì› ê°€ì… ì‹¤íŒ¨~~");
 			model.addAttribute("url", "user2/user2List");
 		}
-		else if(msgFlag.equals("user2UpdateOk")) {
-			model.addAttribute("msg", "¼öÁ¤µÇ¾ú½À´Ï´Ù¤»¤».");
+		else if(msgFlag.equals("user2UserUpdateOk")) {
+			model.addAttribute("msg", "ì •ë³´ìˆ˜ì • ì™„ë£Œ!!");
 			model.addAttribute("url", "user2/user2List");
 		}
-		else if(msgFlag.equals("user2UpdateNo")) {
-			model.addAttribute("msg", "¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù¤»¤».");
+		else if(msgFlag.equals("user2UserUpdateNo")) {
+			model.addAttribute("msg", "ì •ë³´ìˆ˜ì • ì‹¤íŒ¨~~");
 			model.addAttribute("url", "user2/user2List");
 		}
 		else if(msgFlag.equals("guestInputOk")) {
-			model.addAttribute("msg", "¹æ¸í·Ï ±ÛÀÌ µî·ÏµÇ¾ú½À´Ï´ç.");
+			model.addAttribute("msg", "ë°©ëª…ë¡ì— ê¸€ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			model.addAttribute("url", "guest/guestList");
 		}
 		else if(msgFlag.equals("guestInputNo")) {
-			model.addAttribute("msg", "¹æ¸í·Ï ±Û µî·ÏÀÌ ½ÇÆĞÇß½À´Ï´Ù¤»¤».");
+			model.addAttribute("msg", "ë°©ëª…ë¡ ê¸€ì˜¬ë¦¬ê¸° ì‹¤íŒ¨~~~");
 			model.addAttribute("url", "guest/guestInput");
 		}
 		else if(msgFlag.equals("adminLoginOk")) {
-			model.addAttribute("msg", "°ü¸®ÀÚ ÀÎÁõ¼º°ø");
+			model.addAttribute("msg", "ê´€ë¦¬ì ì¸ì¦ ì„±ê³µ");
 			model.addAttribute("url", "guest/guestList");
 		}
 		else if(msgFlag.equals("adminLoginNo")) {
-			model.addAttribute("msg", "°ü¸®ÀÚ ÀÎÁõ½ÇÆĞ");
+			model.addAttribute("msg", "ê´€ë¦¬ì ì¸ì¦ ì‹¤íŒ¨~~");
 			model.addAttribute("url", "guest/adminLogin");
 		}
+		else if(msgFlag.equals("adminLogout")) {
+			model.addAttribute("msg", "ê´€ë¦¬ì ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "guest/guestList");
+		}
 		else if(msgFlag.equals("guestDeleteOk")) {
-			model.addAttribute("msg", "¼±ÅÃÇÑ ±Û »èÁ¦ ¿Ï·á");
+			model.addAttribute("msg", "ë°©ëª…ë¡ì˜ ê¸€ì´ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			model.addAttribute("url", "guest/guestList");
 		}
 		else if(msgFlag.equals("guestDeleteNo")) {
-			model.addAttribute("msg", "¼±ÅÃÇÑ ±Û »èÁ¦ ½ÇÆĞ");
+			model.addAttribute("msg", "ë°©ëª…ë¡ì˜ ê¸€ ì‚­ì œ ì‹¤íŒ¨~~");
 			model.addAttribute("url", "guest/guestList");
 		}
-		else if(msgFlag.equals("adminLogout")) {
-			model.addAttribute("msg", "°ü¸®ÀÚ ·Î±×¾Æ¿ô ¼º°ø");
-			model.addAttribute("url", "guest/guestList");
+		else if(msgFlag.equals("mailSendOk")) {
+			model.addAttribute("msg", "ë©”ì¼ì´ ì„±ê³µì ìœ¼ë¡œ ì „ì†¡ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "study/mail/mail");
 		}
+		else if(msgFlag.equals("memberLoginNo")) {
+			model.addAttribute("msg", "ë¡œê·¸ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		else if(msgFlag.equals("memberLoginOk")) {
+			model.addAttribute("msg", mid+"ë‹˜ ë¡œê·¸ì¸ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberMain");
+		}
+		else if(msgFlag.equals("memberLogout")) {
+			model.addAttribute("msg", mid+"ë‹˜ ë¡œê·¸ì•„ì›ƒ ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		else if(msgFlag.equals("memberJoinOk")) {
+			model.addAttribute("msg", "íšŒì›ê°€ì… ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		else if(msgFlag.equals("memberJoinNo")) {
+			model.addAttribute("msg", "íšŒì›ê°€ì…ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberJoin");
+		}
+/*		else if(msgFlag.equals("idCheckNo")) {
+			model.addAttribute("msg", "ì´ë¯¸ ê°€ì…ëœ ì•„ì´ë””ì…ë‹ˆë‹¤.");
+			model.addAttribute("url", "member/memberJoin");
+		}
+	*/	
 		
 		return "include/message";
 	}
