@@ -14,8 +14,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberVO getMemberIdCheck(String mid) {
-		MemberVO vo=memberDAO.getMemberIdCheck(mid);
-		return vo;
+		return memberDAO.getMemberIdCheck(mid);
 	}
 
 	@Override
@@ -25,11 +24,30 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int setMemberJoinOk(MemberVO vo) {
-		//사진처리해야함~
+		// 사진처리...
 		vo.setPhoto("noimage.jpg");
 		
 		return memberDAO.setMemberJoinOk(vo);
 	}
-	
+
+	@Override
+	public int setUserDel(String mid) {
+		return memberDAO.setUserDel(mid);
+	}
+
+	@Override
+	public int setPwdChangeOk(String mid, String pwd) {
+		return memberDAO.setPwdChangeOk(mid, pwd);
+	}
+
+	@Override
+	public int setMemberUpdateOk(MemberVO vo) {
+		return memberDAO.setMemberUpdateOk(vo);
+	}
+
+	@Override
+	public void setMemberPasswordUpdate(String mid, String pwd) {
+		memberDAO.setMemberPasswordUpdate(mid,pwd);
+	}
 	
 }

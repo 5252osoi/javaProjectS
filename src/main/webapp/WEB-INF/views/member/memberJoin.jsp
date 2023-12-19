@@ -20,14 +20,14 @@
     	// 유효성 검사.....
     	// 아이디,닉네임,성명,이메일,홈페이지,전화번호,비밀번호 등등....
     	
-		let regMid = /^[a-zA-Z0-9_]{4,20}$/;
-		let regPwd = /(?=.*[0-9a-zA-Z]).{4,20}$/;
-		let regNickName = /^[가-힣]+$/;
-		let regName = /^[가-힣a-zA-Z]+$/;
-		let regEmail =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-		let regURL = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/;
-		let regTel = /\d{2,3}-\d{3,4}-\d{4}$/g;
-		    	
+    	let regMid = /^[a-zA-Z0-9_]{4,20}$/;
+    	let regPwd = /(?=.*[0-9a-zA-Z]).{4,20}$/;
+      let regNickName = /^[가-힣]+$/;
+      let regName = /^[가-힣a-zA-Z]+$/;
+      let regEmail =/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+      let regURL = /^(https?:\/\/)?([a-z\d\.-]+)\.([a-z\.]{2,6})([\/\w\.-]*)*\/?$/;
+    	let regTel = /\d{2,3}-\d{3,4}-\d{4}$/g;
+    	
     	let mid = myform.mid.value.trim();
     	let pwd = myform.pwd.value;
     	let nickName = myform.nickName.value;
@@ -150,59 +150,62 @@
     function idCheck() {
     	let mid = myform.mid.value;
     	
-    	if(mid.trim() == "" || mid.length<4 || mid.length>20) {
-    		alert("아이디를 확인하세요. (4~20자 이내)");
+    	if(mid.trim() == "" || mid.length < 4 || mid.length > 20) {
+    		alert("아이디를 확인하세요(아이디는 4~20자 이내)");
     		myform.mid.focus();
     		return false;
     	}
     	
     	$.ajax({
-    		type	: "post",
-    		url		: "${ctp}/member/memberIdCheck",
-    		data	: {mid : mid},
-    		success	: function(res){
-    			if(res=="1"){
-    				alert("이미 사용중인 아이디입니다. 다시 아이디를 입력하세요,");
+    		type  : "post",
+    		url   : "${ctp}/member/memberIdCheck",
+    		data  : {mid : mid},
+    		success:function(res) {
+    			if(res == "1") {
+    				alert("이미 사용중인 아이디 입니다. 다시 아이디를 입력하세요.");
     				$("#mid").focus();
-    			} else {
-    				alert("사용가능한 아이디입니다.");
-    				idCheckSw=1;
-    				myform.mid.readOnly=true;
-    				$("#pwd").focus();
+    			}
+    			else {
+    				alert("사용 가능한 아이디 입니다.");
+    				idCheckSw = 1;
+  	    		myform.mid.readOnly = true;
+  	    		$("#pwd").focus();
     			}
     		},
-    		error	: function(){
-    			alert("전송오류ㅋㅋ")
+    		error : function() {
+    			alert("전송오류!");
     		}
     	});
     }
+    
     // 닉네임 중복체크
     function nickCheck() {
     	let nickName = myform.nickName.value;
     	
-    	if(nickName.trim() == "" || nickName.length<2 || nickName.length>20) {
-    		alert("닉네임을 확인하세요. (4~20자 이내)");
+    	if(nickName.trim() == "" || nickName.length < 2 || nickName.length > 20) {
+    		alert("닉네임을 확인하세요(닉네임은 2~20자 이내)");
     		myform.nickName.focus();
     		return false;
     	}
     	
     	$.ajax({
-    		type	: "post",
-    		url		: "${ctp}/member/memberNickCheck",
-    		data	: {nickName : nickName},
-    		success	: function(res){
-    			if(res=="1"){
-    				alert("이미 사용중인 닉네임입니다. 다른 닉네임을 입력하세요,");
+    		type  : "post",
+    		url   : "${ctp}/member/memberNickCheck",
+    		data  : {nickName : nickName},
+    		success:function(res) {
+    			if(res == "1") {
+    				alert("이미 사용중인 닉네임 입니다. 다시 닉네임을 입력하세요.");
     				$("#nickName").focus();
-    			} else {
-    				alert("사용가능한 닉네임입니다.");
-    				nickCheckSw=1;
-    				myform.nickName.readOnly=true;
-    				$("#name").focus();
+    			}
+    			else {
+    				alert("사용 가능한 닉네임 입니다.");
+    				nickCheckSw = 1;
+  	    		myform.nickName.readOnly = true;
+  	    		$("#name").focus();
     			}
     		},
-    		error	: function(){
-    			alert("전송오류ㅋㅋ")
+    		error : function() {
+    			alert("전송오류!");
     		}
     	});
     }
@@ -227,7 +230,7 @@
 <jsp:include page="/WEB-INF/views/include/slide2.jsp" />
 <p><br/></p>
 <div class="container">
-<!--   <form name="myform" method="post" class="was-validated" enctype="multipart/form-data"> -->
+  <!-- <form name="myform" method="post" class="was-validated" enctype="multipart/form-data"> -->
   <form name="myform" method="post" class="was-validated">
     <h2>회 원 가 입</h2>
     <br/>

@@ -77,30 +77,62 @@ public class MessageController {
 			model.addAttribute("url", "study/mail/mail");
 		}
 		else if(msgFlag.equals("memberLoginNo")) {
-			model.addAttribute("msg", "로그인에 실패했습니다.");
+			model.addAttribute("msg", "회원 로그인 실패~~");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("memberLoginOk")) {
-			model.addAttribute("msg", mid+"님 로그인 되었습니다.");
+			model.addAttribute("msg", mid + "님 로그인 되셨습니다.");
 			model.addAttribute("url", "member/memberMain");
 		}
 		else if(msgFlag.equals("memberLogout")) {
-			model.addAttribute("msg", mid+"님 로그아웃 되었습니다.");
+			model.addAttribute("msg", mid + "님 로그아웃 되었습니다.");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("memberJoinOk")) {
-			model.addAttribute("msg", "회원가입 되었습니다.");
+			model.addAttribute("msg", "회원 가입 되었습니다.");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("memberJoinNo")) {
-			model.addAttribute("msg", "회원가입에 실패했습니다.");
+			model.addAttribute("msg", "회원 가입 실패~~");
 			model.addAttribute("url", "member/memberJoin");
 		}
-/*		else if(msgFlag.equals("idCheckNo")) {
-			model.addAttribute("msg", "이미 가입된 아이디입니다.");
+		else if(msgFlag.equals("idCheckNo")) {
+			model.addAttribute("msg", "아이디가 중복되었습니다.");
 			model.addAttribute("url", "member/memberJoin");
 		}
-	*/	
+		else if(msgFlag.equals("nickCheckNo")) {
+			model.addAttribute("msg", "닉네임이 중복되었습니다.");
+			model.addAttribute("url", "member/memberUpdate");
+		}
+		else if(msgFlag.equals("memberUpdateOk")) {
+			model.addAttribute("msg", "회원정보가 수정되었습니다.");
+			model.addAttribute("url", "member/memberUpdate");
+		}
+		else if(msgFlag.equals("memberUpdateNo")) {
+			model.addAttribute("msg", "회원정보 수정실패~~");
+			model.addAttribute("url", "member/memberUpdate");
+		}
+		else if(msgFlag.equals("boardInputOk")) {
+			model.addAttribute("msg", "게시글 작성완료");
+			model.addAttribute("url", "board/boardList");
+		}
+		else if(msgFlag.equals("boardInputNo")) {
+			model.addAttribute("msg", "게시글 작성실패~~");
+			model.addAttribute("url", "board/boardInput");
+		}
+		else if(msgFlag.equals("adminNo")) {
+			model.addAttribute("msg", "관리자만 접근할 수 있습니다.");
+			model.addAttribute("url", "/");
+		}
+		else if(msgFlag.equals("memberLevelNo")) {
+			model.addAttribute("msg", "해당 등급은 접근할 수 없습니다.");
+			model.addAttribute("url", "/");
+		}
+		else if(msgFlag.equals("memberNo")) {
+			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
+			model.addAttribute("url", "member/memberLogin");
+		}
+		
 		
 		return "include/message";
 	}
