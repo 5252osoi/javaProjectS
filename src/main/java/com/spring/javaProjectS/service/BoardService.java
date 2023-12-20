@@ -2,18 +2,24 @@ package com.spring.javaProjectS.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.spring.javaProjectS.vo.BoardVO;
 
-@Service
 public interface BoardService {
 
-	public List<BoardVO> getBoardList();
-
-	public int setboardInput(BoardVO vo);
+	public int setBoardInput(BoardVO vo);
 
 	public BoardVO getBoardContent(int idx);
+
+	public List<BoardVO> getBoardList(int startIndexNo, int pageSize);
+
+	public void imgCheck(String content);
+
+	public int setBoardDelete(int idx);
+
+	public void imgDelete(String content);
+
+	public void imgBackup(String content);
+
+	public int setBoardUpdate(BoardVO vo);
 
 }

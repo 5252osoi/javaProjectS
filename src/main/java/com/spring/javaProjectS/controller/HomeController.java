@@ -1,6 +1,5 @@
 package com.spring.javaProjectS.controller;
 
-import java.awt.print.Printable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -34,30 +33,30 @@ public class HomeController {
 		//return "redirect:/user/userList";
 		//return "redirect:/user2/user2List";
 	}
-	@RequestMapping(value = "/imageUpload")
+	
+	@RequestMapping(value="/imageUpload")
 	public void imageUploadGet(MultipartFile upload,
-			HttpServletRequest request,HttpServletResponse response) throws IOException {
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/ckeditor/board/");
-		String oFileName =upload.getOriginalFilename();
+		String realPath = request.getSession().getServletContext().getRealPath("/resources/data/ckeditor/");
+		String oFileName = upload.getOriginalFilename();
 		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
-		oFileName = sdf.format(date)+"_"+oFileName;
+		oFileName = sdf.format(date) + "_" + oFileName;
 		
 		byte[] bytes = upload.getBytes();
 		FileOutputStream fos = new FileOutputStream(new File(realPath+oFileName));
 		fos.write(bytes);
 		
 		PrintWriter out = response.getWriter();
-		String fileUrl=request.getContextPath()+"/data/ckeditor/board/"+oFileName; /*"/data/ckeditor/(변수)"*/
+		String fileUrl = request.getContextPath() + "/data/ckeditor/" + oFileName;
 		out.println("{\"originalFilename\":\""+oFileName+"\",\"uploaded\":1,\"url\":\""+fileUrl+"\"}");
 		
 		out.flush();
 		fos.close();
-		
 	}
 	
 }
