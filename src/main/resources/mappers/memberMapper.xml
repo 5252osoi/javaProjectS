@@ -9,12 +9,17 @@
   <select id="getMemberNickCheck" resultType="com.spring.javaProjectS.vo.MemberVO">
     select * from member2 where nickName = #{nickName};
   </select>  
+
+  <select id="getMemberEmailSearch" resultType="com.spring.javaProjectS.vo.MemberVO">
+    select * from member2 where email = #{email};
+  </select>  
   
   
   
   <insert id="setMemberJoinOk">
     insert into member2 values (default,#{vo.mid},#{vo.pwd},#{vo.nickName},#{vo.name},#{vo.gender},#{vo.birthday},#{vo.tel},#{vo.address},#{vo.email},#{vo.homePage},#{vo.job},#{vo.hobby},#{vo.photo},#{vo.content},#{vo.userInfor},default,default,default,default,default,default,default);
   </insert>
+  
   
   
   <update id="setPwdChangeOk">
@@ -24,9 +29,12 @@
   <update id="setMemberUpdateOk">
     update member2 set nickName=#{vo.nickName},name=#{vo.name},gender=#{vo.gender},birthday=#{vo.birthday},tel=#{vo.tel},address=#{vo.address},email=#{vo.email},homePage=#{vo.homePage},job=#{vo.job},hobby=#{vo.hobby},photo=#{vo.photo},content=#{vo.content},userInfor=#{vo.userInfor} where mid=#{vo.mid};
   </update>
+  
   <update id="setMemberPasswordUpdate">
-  	UPDATE member2 set pwd = #{pwd} where mid = #{mid};
+    update member2 set pwd = #{pwd} where mid = #{mid};
   </update>
+  
+  
   
   <delete id="setUserDel">
     update member2 set userDel = 'OK' where mid = #{mid};

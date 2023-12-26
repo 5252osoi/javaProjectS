@@ -1,58 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="ctp" value="${pageContext.request.contextPath}"/>
+<c:set var="ctp" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<jsp:include page="/WEB-INF/views/include/bs4.jsp"/>
-	<title>guestInput.jsp</title>	
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>guestInput.jsp</title>
+  <jsp:include page="/WEB-INF/views/include/bs4.jsp" />
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/include/nav.jsp" /> 
-<jsp:include page="/WEB-INF/views/include/slide2.jsp" /> 
-	<p><br/></p>
-	<div class="container">
-		<h2 class="text-center">방명록리스트</h2>
-		<table class="table table-borderless">
-			<tr>
-				<td></td>
-				<td class="text-right"><a href="${ctp}/guest/guestList.jsp" class="btn btn-info">취소</a></td>
-			</tr>
-		</table>
-		<table class="table table-borderless">
-			<tr>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
-		<form name="myform" method="post">
-			<table class="table table-bordered">
-				<tr>
-					<th>성명</th>
-					<td><input type="text" name="name" id="name" class="form-control" required></td>
-					<th>메일주소</th>
-					<td><input type="text" name="email" id="email" class="form-control"></td>
-				</tr>
-				<tr>
-					<th colspan="2">내용작성</th>
-					<th>홈페이지</th>
-					<td><input type="text" name="homePage" id="homePage" class="form-control"></td>
-				</tr>
-				<tr>
-					<!-- <td colspan="4"><input type="text" name="content" id="content" style="height:300px;" class="form-control"/></td> -->
-					<td colspan="4"><textarea name="content" id="content" rows="8" class="form-control" style="resize:none;" required></textarea></td>
-				</tr>
-				<tr>
-					<td colspan="4"><input type="submit" class="btn btn-success btn-block"></td>
-				</tr>
-			</table>	
-			<input type="hidden" name="hostIp" value="<%=request.getRemoteAddr() %>" />			
-		</form>
-	</div>
-		
-	<p><br/></p>
-<jsp:include page="/WEB-INF/views/include/footer.jsp"/>
+<jsp:include page="/WEB-INF/views/include/nav.jsp" />
+<jsp:include page="/WEB-INF/views/include/slide2.jsp" />
+<p><br/></p>
+<div class="container">
+  <h2 class="text-center">방명록 글올리기</h2>
+  <form name="myform" method="post" class="was-validated">
+    <div class="form-group">
+      <label for="name">성명</label>
+      <input type="text" class="form-control" id="name" value="${sMid}" placeholder="Enter username" name="name" autofocus required />
+      <div class="valid-feedback">Ok!!!</div>
+      <div class="invalid-feedback">성명을 입력해 주세요.</div>
+    </div>
+    <div class="form-group">
+      <label for="name">E-mail</label>
+      <input type="text" class="form-control" id="email" placeholder="Enter email" name="email" />
+    </div>
+    <div class="form-group">
+      <label for="name">Homepage</label>
+      <input type="text" class="form-control" id="homePage" placeholder="Enter Homepage" name="homePage" value="https://" />
+    </div>
+    <div class="form-group">
+      <label for="pwd">방문소감</label>
+      <textarea rows="5" name="content" id="content" required class="form-control"></textarea>
+      <div class="valid-feedback">Ok!!!</div>
+      <div class="invalid-feedback">방문소감을 입력해 주세요.</div>
+    </div>
+    <div class="form-group text-center">
+    	<button type="submit" class="btn btn-primary mr-3">방명록 등록</button>
+    	<button type="reset" class="btn btn-warning mr-3">방명록 다시입력</button>
+    	<button type="button" onclick="location.href='${ctp}/GuestList';" class="btn btn-danger">돌아가기</button>
+    </div>
+    <input type="hidden" name="hostIp" value="<%=request.getRemoteAddr()%>"/>
+  </form>
+</div>
+<p><br/></p>
+<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 </body>
 </html>

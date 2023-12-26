@@ -1,5 +1,6 @@
 package com.spring.javaProjectS.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -25,7 +26,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.spring.javaProjectS.service.MemberService;
-import com.spring.javaProjectS.vo.MailVO;
 import com.spring.javaProjectS.vo.MemberVO;
 
 @Controller
@@ -220,31 +220,34 @@ public class MemberController {
 		}
 		else return "redirect:/member/memberUpdateNo";
 	}
-	//비밀번호찾기
+	
+	// 비밀번호 찾기
 	@ResponseBody
-	@RequestMapping(value = "/memberPasswordSearch",method = RequestMethod.POST)
-	public String memberPasswordSearchPost(String mid,String email) throws MessagingException {
+	@RequestMapping(value = "/memberPasswordSearch", method = RequestMethod.POST)
+	public String memberPasswordSearchPost(String mid, String email) throws MessagingException {
 		MemberVO vo = memberService.getMemberIdCheck(mid);
-		if(vo!=null && vo.getEmail().equals(email)) {
-			//정보 확인 후 UUID 8 자리로 임시비밀번호 발급
+		if(vo != null && vo.getEmail().equals(email)) {
+			// 정보 확인후, 임시비밀번호를 발급받아서 메일로 전송처리한다.
 			UUID uid = UUID.randomUUID();
-			String pwd= uid.toString().substring(0,8);
+			String pwd = uid.toString().substring(0,8);
 			
-			//발급받은 비밀번호 암호화 후 DB에 저장 
-			memberService.setMemberPasswordUpdate(mid,passwordEncoder.encode(pwd));
+			// 발급받은 비밀번호를 암호화후 DB에 저장한다.
+			memberService.setMemberPasswordUpdate(mid, passwordEncoder.encode(pwd));
 			
-			//발급받은 임시번호를 회원 메일주소로 전송처리
-			String title = "임시 비밀번호입니다.";
-			String mailFlag = "임시비밀번호 : "+pwd;
-			String res=mailSend(email, title, mailFlag);
-			if(res=="1") return "1";
+			// 발급받은 임시번호를 회원 메일주소로 전송처리한다.
+			String title = "임시 비밀번호를 발급하셨습니다.";
+			String mailFlag = "임시 비밀번호 : " + pwd;
+			String res = mailSend(email, title, mailFlag);
+			
+			if(res == "1") return "1";
 		}
 		return "0";
 	}
+	
 	// 메일 전송하기
-	public String mailSend(String toMail,String title,String mailFlag) throws MessagingException {
+	public String mailSend(String toMail, String title, String mailFlag) throws MessagingException {
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-		String content="";
+		String content = "";
 		// 메일 전송을 위한 객체 : MimeMessage(), MimeMessageHelper()
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -262,11 +265,48 @@ public class MemberController {
 		content += "<hr>";
 		messageHelper.setText(content, true);
 		
+		// 본문에 기재된 그림파일의 경로와 파일명을 별로도 표시한다. 그런후 다시 보관함에 저장한다.
 		FileSystemResource file = new FileSystemResource(request.getSession().getServletContext().getRealPath("/resources/images/main.jpg"));
+		//FileSystemResource file = new FileSystemResource("D:\\JavaProject\\springframework\\works\\javaProjectS\\src\\main\\webapp\\resources\\images\\main.jpg");
 		messageHelper.addInline("main.jpg", file);
 		
 		// 메일 전송하기
 		mailSender.send(message);
+		
 		return "1";
+	}
+	
+	// 회원가입시 이메일로 인증번호 전송하기
+	@ResponseBody
+	@RequestMapping(value = "/memberEmailCheck", method = RequestMethod.POST)
+	public String memberEmailCheckPost(String email, HttpSession session) throws MessagingException {
+		UUID uid = UUID.randomUUID();
+		String emailKey = uid.toString().substring(0,8);
+		session.setAttribute("sEmailKey", emailKey);
+		
+		mailSend(email, "이메일 인증키입니다.", "인증키 : "+emailKey);
+		return "1";
+	}
+	
+	// 이메일 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/memberEmailCheckOk", method = RequestMethod.POST)
+	public String memberEmailCheckOkPost(String checkKey, HttpSession session) throws MessagingException {
+		String sCheckKey = (String) session.getAttribute("sEmailKey");
+		if(checkKey.equals(sCheckKey)) return "1";
+		else return "0";
+	}
+	
+	// 아이디 검색
+	@ResponseBody
+	@RequestMapping(value = "/memberEmailSearch", method = RequestMethod.POST)
+	public String memberEmailSearchPost(String email) {
+		List<MemberVO> vos = memberService.getMemberEmailSearch(email);
+		String res = "";
+		for(MemberVO vo : vos) {
+			res += vo.getMid() + "/";
+		}
+		if(vos.size() == 0) return "0";
+		else return res;
 	}
 }

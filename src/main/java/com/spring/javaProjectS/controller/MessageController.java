@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MessageController {
 
 	@RequestMapping(value="/message/{msgFlag}", method = RequestMethod.GET)
-	public String msgGet(@PathVariable String msgFlag, String mid, Model model,
-			@RequestParam(name="idx",defaultValue = "0",required = false)int idx,
-			@RequestParam(name="pag",defaultValue = "1",required = false)int pag,
-			@RequestParam(name="pageSize",defaultValue = "5",required = false)int pageSize
-			) {
+	public String msgGet(@PathVariable String msgFlag, String mid, Model model, 
+			@RequestParam(name="temp", defaultValue="",required=false) String temp,
+			@RequestParam(name="idx", defaultValue="0",required=false) int idx,
+			@RequestParam(name="pag", defaultValue="1",required=false) int pag,
+			@RequestParam(name="pageSize", defaultValue="5",required=false) int pageSize) {
 		
 		if(msgFlag.equals("userDeleteOk")) {
 			model.addAttribute("msg", "user가 삭제 되었습니다.");
@@ -118,40 +118,61 @@ public class MessageController {
 			model.addAttribute("url", "member/memberUpdate");
 		}
 		else if(msgFlag.equals("boardInputOk")) {
-			model.addAttribute("msg", "게시글 작성완료");
+			model.addAttribute("msg", "게시판에 글이 등록되었습니다.");
 			model.addAttribute("url", "board/boardList");
 		}
 		else if(msgFlag.equals("boardInputNo")) {
-			model.addAttribute("msg", "게시글 작성실패~~");
+			model.addAttribute("msg", "게시판에 글 등록실패~~");
 			model.addAttribute("url", "board/boardInput");
 		}
 		else if(msgFlag.equals("adminNo")) {
-			model.addAttribute("msg", "관리자만 접근할 수 있습니다.");
+			model.addAttribute("msg", "관리자만 접속하실수 있습니다.");
 			model.addAttribute("url", "/");
 		}
 		else if(msgFlag.equals("memberLevelNo")) {
-			model.addAttribute("msg", "해당 등급은 접근할 수 없습니다.");
+			model.addAttribute("msg", "해당등급으로는 접근하실수 없습니다.");
 			model.addAttribute("url", "/");
 		}
 		else if(msgFlag.equals("memberNo")) {
-			model.addAttribute("msg", "로그인 후 이용 가능합니다.");
+			model.addAttribute("msg", "로그인후 사용하세요.");
 			model.addAttribute("url", "member/memberLogin");
 		}
 		else if(msgFlag.equals("boardDeletOk")) {
-			model.addAttribute("msg", "게시글을 삭제했습니다.");
+			model.addAttribute("msg", "게시글이 삭제되었습니다.");
 			model.addAttribute("url", "board/boardList?pag="+pag+"&pageSize="+pageSize);
 		}
 		else if(msgFlag.equals("boardDeletNo")) {
-			model.addAttribute("msg", "게시글 삭제에 실패했습니다.");
+			model.addAttribute("msg", "게시글 삭제 실패~~");
 			model.addAttribute("url", "board/boardContent?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
 		}
 		else if(msgFlag.equals("boardUpdateOk")) {
-			model.addAttribute("msg", "게시글을 수정했습니다.");
-			model.addAttribute("url", "board/boardContent?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
+			model.addAttribute("msg", "게시글이 수정되었습니다.");
+			model.addAttribute("url", "board/boardContent?idx="+idx+"&pag="+
+			pag+"&pageSize="+pageSize);
 		}
 		else if(msgFlag.equals("boardUpdateNo")) {
-			model.addAttribute("msg", "게시글 수정에 실패했습니다.");
-			model.addAttribute("url", "board/boardContent?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
+			model.addAttribute("msg", "게시글 수정 실패~~");
+			model.addAttribute("url", "board/boardUpdate?idx="+idx+"&pag="+pag+"&pageSize="+pageSize);
+		}
+		else if(msgFlag.equals("validatorError")) {
+			model.addAttribute("msg", "user 등록 실패~~" + temp + "를 확인하세요..");
+			model.addAttribute("url", "user2/user2List");
+		}
+		else if(msgFlag.equals("fileUploadOk")) {
+			model.addAttribute("msg", "파일이 업로드 되었습니다.");
+			model.addAttribute("url", "study/fileUpload/fileUpload");
+		}
+		else if(msgFlag.equals("fileUploadNo")) {
+			model.addAttribute("msg", "파일 업로드 실패~~");
+			model.addAttribute("url", "study/fileUpload/fileUpload");
+		}
+		else if(msgFlag.equals("pdsInputOk")) {
+			model.addAttribute("msg", "자료실에 등록되었습니다.");
+			model.addAttribute("url", "pds/pdsList");
+		}
+		else if(msgFlag.equals("pdsInputNo")) {
+			model.addAttribute("msg", "자료실에 등록실패~~");
+			model.addAttribute("url", "pds/pdsInput");
 		}
 		
 		

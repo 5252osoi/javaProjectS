@@ -14,7 +14,7 @@ public class BoardVO {
   private int readNum;
   private String hostIp;
   private String openSw;
-  private String WDate;
+  private String wDate;
   private int good;
   
   private int hour_diff;	 // 게시글 24시간 동안 new.gif 이미지 표시를 위한 변수

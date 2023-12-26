@@ -1,23 +1,22 @@
 show tables;
 
-create table user(
-	idx int not null auto_increment primary key,
-	mid varchar(20) not null,
-	name varchar(20) not null,
-	age int default 20,
-	address varchar(10)
+create table user (
+  idx  int not null auto_increment primary key,
+  mid  varchar(20) not null,
+  name varchar(20) not null,
+  age  int  default 20,
+  address varchar(10)
 );
 
 desc user;
 
-insert into user values (default, 'abc', 'ÀÌÀÌ¸§',20,'¼­¿ï');
-insert into user values (default, 'zxc', '±×ÀÌ¸§',20,'¼­¿ï');
-insert into user values (default, 'ord', 'ÀúÀÌ¸§',20,'¼­¿ï');
-insert into user values (default, 'qwe', '¿¡ÈŞ½º',20,'¼­¿ï');
-insert into user values (default, 'njlol', '±è³²Á¦',28,'¼­¿ï');
-
 select * from user;
 
-delete from user where idx=8;
+insert into user values (default,'aaaa','ì—ì—ì—',22,'ì„œìš¸');
+insert into user values (default,'bbbb','ë¹„ë¹„ë¹„',23,'ì²­ì£¼');
+insert into user values (default,'cccc','ì”¨ì”¨ì”¨',24,'ì œì£¼');
 
-SELECT * FROM user WHERE name LIKE concat('%','¿¡','%') ORDER BY idx DESC;
+delete from user where idx = 10;
+
+select * from user where name like '%ì—%' order by idx desc;
+select * from user where name like concat('%','ì—','%') order by idx desc;

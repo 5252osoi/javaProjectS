@@ -8,23 +8,30 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class Level2Interceptor extends HandlerInterceptorAdapter{
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
-		int level = session.getAttribute("sLevel")==null?99:(int)session.getAttribute("sLevel");
+		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
 		
-		//정회원 미만은 돌려보냄(준,비회원)
+		// 정회원이상(준회원(3), 비회원(99))
 		if(level > 2) {
 			RequestDispatcher dispatcher;
-			if(level==99) { //비회원일때
-				dispatcher=request.getRequestDispatcher("/message/memberNo");
-			} else {		//준회원일때
-				dispatcher=request.getRequestDispatcher("/message/memberLevelNo");
+			if(level == 99) {	// 비회원
+				dispatcher = request.getRequestDispatcher("/message/memberNo");
 			}
+			else {		// 준회원
+				dispatcher = request.getRequestDispatcher("/message/memberLevelNo");
+			}
+			
 			dispatcher.forward(request, response);
 			return false;
 		}
+		
+		
 		return true;
 	}
+
+	
+	
 }
