@@ -34,6 +34,7 @@ import com.spring.javaProjectS.common.SecurityUtil;
 import com.spring.javaProjectS.service.StudyService;
 import com.spring.javaProjectS.vo.MailVO;
 import com.spring.javaProjectS.vo.UserVO;
+import com.spring.javaProjectS.vo.KakaoAddressVO;
 
 @Controller
 @RequestMapping("/study")
@@ -309,4 +310,59 @@ public class StudyController {
 		sos.close();
 		fis.close();
 	}
+	
+	@RequestMapping(value = "/kakao/kakaomap", method = RequestMethod.GET)
+	public String kakaomapGet() {
+		return "study/kakao/kakaomap";
+	}
+	//카카오맵연습
+	@RequestMapping(value = "/kakao/kakaoEx1", method = RequestMethod.GET)
+	public String kakaoEx1Get() {
+		return "study/kakao/kakaoEx1";
+	}
+	//카카오맵장소DB저장
+	@ResponseBody
+	@RequestMapping(value = "/kakao/kakaoEx1", method = RequestMethod.POST)
+	public String kakaoEx1Post(KakaoAddressVO vo) {
+		KakaoAddressVO searchVO = studyService.getKakaoAddressSearch(vo.getAddress());
+		System.out.println("dd");
+		int res=1;
+		if(searchVO!=null) {
+			res=0;
+		}
+		else {
+			res=studyService.setKakaoAddressInput(vo);
+		}
+	
+		return res+"";
+	}
+	//카카오맵연습2
+	@RequestMapping(value = "/kakao/kakaoEx2", method = RequestMethod.GET)
+	public String kakaoEx2Get(Model model,
+			@RequestParam(name="address",defaultValue ="", required = false)String address) {
+		
+		KakaoAddressVO vo = new KakaoAddressVO();
+		
+		List<KakaoAddressVO> vos = studyService.getKakaoAddressList();
+		if(address.equals("")) {
+			vo.setAddress("학원");
+			vo.setLatitude(36.635119712647004);
+			vo.setLongitude(127.45954363660475);
+		}else {
+			vo = studyService.getKakaoAddressSearch(address);
+		}
+		
+		model.addAttribute("vos",vos);
+		model.addAttribute("vo",vo);
+		return "study/kakao/kakaoEx2";
+	}
+	//카카오맵연습
+	@RequestMapping(value = "/kakao/kakaoEx3", method = RequestMethod.GET)
+	public String kakaoEx3Get(Model model,
+			@RequestParam(name="address",defaultValue ="청주시청", required = false)String address) {
+		
+		model.addAttribute("address",address);
+		return "study/kakao/kakaoEx3";
+	}
+
 }
